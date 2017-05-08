@@ -1,0 +1,19 @@
+{
+  "name": "spqr/toc",
+  "version": "0.0.1",
+  "type": "pagekit-extension",
+  "title": "Table Of Contents",
+  "description": "Adds a table of contents Pagekit",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Roman Lossin-Beßler",
+      "homepage": "https://spqr.wtf"
+    }
+  ],
+  "extra": {
+    "icon": "icon.svg"
+  },
+  "require": {
+  }
+}
