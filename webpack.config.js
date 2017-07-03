@@ -1,7 +1,7 @@
 module.exports = [
     {
         entry: {
-            "settings": "./app/views/admin/settings.js"
+            "toc-settings": "./app/components/toc-settings.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

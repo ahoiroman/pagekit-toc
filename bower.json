@@ -1,0 +1,7 @@
+{
+  "name": "toc",
+  "dependencies": {
+    "tocbot": "*"
+  },
+  "private": true
+}

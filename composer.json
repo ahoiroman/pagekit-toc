@@ -1,9 +1,10 @@
 {
   "name": "spqr/toc",
-  "version": "0.0.1",
+  "module": "spqr/toc",
+  "version": "1.0.0",
   "type": "pagekit-extension",
   "title": "Table Of Contents",
-  "description": "Adds a table of contents Pagekit",
+  "description": "Adds a table of contents",
   "license": "MIT",
   "authors": [
     {
@@ -12,8 +13,10 @@
     }
   ],
   "extra": {
-    "icon": "icon.svg"
+    "icon": "icon.svg",
+    "scripts": "scripts.php"
   },
   "require": {
+    "caseyamcl/toc": "~1.0"
   }
 }
