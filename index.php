@@ -37,9 +37,11 @@ return [
 	
 	'config' => [
 		'nodes'                   => [],
+		'mode'                    => 'content',
+		'css'                     => '',
+		'js'                      => '',
 		'toc_selector'            => '.toc',
 		'toc_selector_class'      => 'uk-panel uk-panel-box-primary',
-		'css'                     => '',
 		'content_selector'        => '.uk-article',
 		'ignore_selector'         => '.toc-ignore',
 		'heading_selector'        => [ 'h1', 'h2', 'h3' ],
@@ -78,20 +80,20 @@ return [
 						$params      = [];
 						$paramstring = '';
 						
-						$params[ 'tocSelector' ]          =
+						$params[ 'tocSelector' ]           =
 							( !empty( $config[ 'toc_selector' ] ) ? $config[ 'toc_selector' ] : '' );
-						$params[ 'headingSelector' ]      =
+						$params[ 'headingSelector' ]       =
 							( !empty( $config[ 'heading_selector' ] ) ? implode( ",", $config[ 'heading_selector' ] )
 								: '' );
-						$params[ 'contentSelector' ]      =
+						$params[ 'contentSelector' ]       =
 							( !empty( $config[ 'content_selector' ] ) ? $config[ 'content_selector' ] : '' );
-						$params[ 'ignoreSelector' ]       =
+						$params[ 'ignoreSelector' ]        =
 							( !empty( $config[ 'ignore_selector' ] ) ? $config[ 'ignore_selector' ] : '' );
-						$params[ 'linkClass' ]            =
+						$params[ 'linkClass' ]             =
 							( !empty( $config[ 'link_class' ] ) ? $config[ 'link_class' ] : '' );
-						$params[ 'smoothScroll' ]         =
+						$params[ 'smoothScroll' ]          =
 							( !empty( $config[ 'smoothscroll' ] ) ? $config[ 'smoothscroll' ] : false );
-						$params[ 'smoothScrollDuration' ] =
+						$params[ 'smoothScrollDuration' ]  =
 							( !empty( $config[ 'smoothscroll_duration' ] ) ? $config[ 'smoothscroll_duration' ] : 0 );
 						$params[ 'activeLinkClass' ]       =
 							( !empty( $config[ 'active_link_class' ] ) ? $config[ 'active_link_class' ] : '' );
@@ -140,8 +142,11 @@ return [
 						);
 						
 						if ( !empty( $config[ 'css' ] ) ) {
-							$app[ 'styles' ]->add( 'tocbotcustom', $config[ 'css' ], [], 'string' );
-							
+							$app[ 'styles' ]->add( 'tocbotcustomcss', $config[ 'css' ], [], 'string' );
+						}
+						
+						if ( !empty( $config[ 'js' ] ) ) {
+							$app[ 'scripts' ]->add( 'tocbotcustomjs', $config[ 'js' ], [], 'string' );
 						}
 						
 						$app[ 'scripts' ]->add(

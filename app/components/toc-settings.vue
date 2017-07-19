@@ -7,6 +7,16 @@
                 <input-tree :active.sync="package.config.nodes"></input-tree>
             </div>
         </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Mode' | trans }}</label>
+            <div class="uk-form-controls">
+                <select class="uk-form-large" v-model="package.config.mode">
+                    <option value="content">{{ 'Content' | trans }}</option>
+                    <option value="widget">{{ 'Widget' | trans }}</option>
+                </select>
+            </div>
+        </div>
+
         <div class="uk-form-row ">
             <div class="uk-form-controls">
                 <button @click="toggle(showdetails)" class="uk-button">{{ showdetails ? "Hide Details" : "Show Details" | trans }}</button>
@@ -17,6 +27,12 @@
                 <label class="uk-form-label">{{ 'Custom CSS' | trans }}</label>
                 <div class="uk-form-controls uk-form-controls-text">
                     <v-editor type="code" :value.sync="package.config.css"></v-editor>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">{{ 'Custom JavaScript' | trans }}</label>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <v-editor type="code" :value.sync="package.config.js"></v-editor>
                 </div>
             </div>
             <div class="uk-form-row">
@@ -157,8 +173,8 @@
                 </div>
             </div>
             <form class="uk-form uk-form-stacked" v-validator="formHeadingSelector" @submit.prevent="add | valid">
-            <h2>{{ 'Heading Selectors' | trans }}</h2>
-            <div class="uk-form-row">
+                <h2>{{ 'Heading Selectors' | trans }}</h2>
+                <div class="uk-form-row">
                     <div class="uk-grid" data-uk-margin>
                         <div class="uk-width-large-1-2">
                             <input class="uk-input-large"
@@ -167,7 +183,8 @@
                                    name="heading_selector"
                                    v-model="newHeadingSelector"
                                    v-validate:required>
-                            <p class="uk-form-help-block uk-text-danger" v-show="formHeadingSelector.heading_selector.invalid">
+                            <p class="uk-form-help-block uk-text-danger"
+                               v-show="formHeadingSelector.heading_selector.invalid">
                                 {{ 'Invalid value.' | trans }}</p>
                         </div>
                         <div class="uk-width-large-1-2">
@@ -182,16 +199,18 @@
                     </div>
                 </div>
             </form>
-            <hr />
-            <div class="uk-alert" v-if="!package.config.heading_selector.length">{{ 'You can add your first heading selector using the input field above. Go ahead!' | trans }}</div>
+            <hr/>
+            <div class="uk-alert"
+                 v-if="!package.config.heading_selector.length">{{ 'You can add your first heading selector using the input field above. Go ahead!' | trans }}
+            </div>
             <ul class="uk-list uk-list-line" v-if="package.config.heading_selector.length">
                 <li v-for="headingSelector in package.config.heading_selector">
                     <input class="uk-input-large"
                            type="text"
                            placeholder="{{ 'Heading Selector' | trans }}"
-                           v-model="headingSelector">
+                           v-model="headingSelector"/>
                     <span class="uk-align-right">
-                        <button @click="remove(headingSelector)" class="uk-button uk-button-danger">
+                        <button class="uk-button uk-button-danger" @click="remove(headingSelector)">
                             <i class="uk-icon-remove"></i>
                         </button>
                     </span>
@@ -210,18 +229,18 @@
 
 module.exports = {
 
-    settings: true,
+	settings: true,
 
-    props: ['package'],
+	props: ['package'],
 
-    data: function () {
-        return {
-            'showdetails': false
-        };
-    },
+	data: function () {
+		return {
+			'showdetails': false
+		};
+	},
 
-    methods: {
-        save: function save() {
+	methods: {
+		save: function save () {
 			this.$http.post ('admin/system/settings/config', {
 				name: 'spqr/toc',
 				config: this.package.config
@@ -232,22 +251,22 @@ module.exports = {
 			}).finally (function () {
 				this.$parent.close ();
 			});
-        },
-        add: function add(e) {
-            e.preventDefault();
-            if (!this.newHeadingSelector) return;
+		},
+		add: function add (e) {
+			e.preventDefault ();
+			if (!this.newHeadingSelector) return;
 
-            this.package.config.heading_selector.push(this.newHeadingSelector);
-            this.newHeadingSelector = '';
-        },
-        remove: function (headingSelector) {
-            this.package.config.heading_selector.$remove(headingSelector);
-        },
-        toggle: function(showdetails) {
-            this.showdetails = !showdetails;
-        },
+			this.package.config.heading_selector.push (this.newHeadingSelector);
+			this.newHeadingSelector = '';
+		},
+		remove: function (headingSelector) {
+			this.package.config.heading_selector.$remove (headingSelector);
+		},
+		toggle: function (showdetails) {
+			this.showdetails = !showdetails;
+		},
 
-    }
+	}
 };
 
 window.Extensions.components['toc-settings'] = module.exports;

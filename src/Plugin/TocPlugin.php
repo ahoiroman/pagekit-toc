@@ -20,6 +20,10 @@ class TocPlugin implements EventSubscriberInterface
 		$module = App::module( 'spqr/toc' );
 		$config = $module->config;
 		
+		if ( $config[ 'mode' ] != 'content' ) {
+			return;
+		}
+		
 		if ( !$event[ 'post' ] && !$event[ 'page' ] ) {
 			return;
 		}
