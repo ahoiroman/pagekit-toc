@@ -17,9 +17,17 @@ return [
 	
 	'nodes' => [],
 	
-	'routes' => [],
-	
-	'widgets' => [],
+	'routes'  => [
+		'/toc' => [
+			'name'       => '@toc',
+			'controller' => [
+				'Spqr\\Toc\\Controller\\TocController'
+			]
+		],
+	],
+	'widgets' => [
+		'widgets/toc.php'
+	],
 	
 	'menu' => [],
 	
@@ -36,8 +44,8 @@ return [
 	],
 	
 	'config' => [
+		'autoinsert'              => true,
 		'nodes'                   => [],
-		'mode'                    => 'content',
 		'css'                     => '',
 		'js'                      => '',
 		'toc_selector'            => '.toc',
@@ -71,11 +79,14 @@ return [
 			$app->on(
 				'view.content',
 				function( $event, $scripts ) use ( $app ) {
-					if ( ( !$this->config[ 'nodes' ] || in_array( $app[ 'node' ]->id, $this->config[ 'nodes' ] ) ) ) {
+					if ( $this->config[ 'autoinsert' ] && ( !$this->config[ 'nodes' ] || in_array(
+								$app[ 'node' ]->id,
+								$this->config[ 'nodes' ]
+							) )
+					) {
 						
 						$module = App::module( 'spqr/toc' );
 						$config = $module->config;
-						
 						
 						$params      = [];
 						$paramstring = '';

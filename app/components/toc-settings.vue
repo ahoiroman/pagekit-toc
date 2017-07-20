@@ -2,21 +2,17 @@
     <div class="uk-form uk-form-horizontal">
         <h1>{{ 'TOC Settings' | trans }}</h1>
         <div class="uk-form-row">
+            <label class="uk-form-label">{{ 'Insert TOC automatically' | trans }}</label>
+            <div class="uk-form-controls uk-form-controls-text">
+                <input type="checkbox" v-model="package.config.autoinsert">
+            </div>
+        </div>
+        <div v-if="package.config.autoinsert" class="uk-form-row">
             <label class="uk-form-label">{{ 'Pages' | trans }}</label>
             <div class="uk-form-controls uk-form-controls-text">
                 <input-tree :active.sync="package.config.nodes"></input-tree>
             </div>
         </div>
-        <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Mode' | trans }}</label>
-            <div class="uk-form-controls">
-                <select class="uk-form-large" v-model="package.config.mode">
-                    <option value="content">{{ 'Content' | trans }}</option>
-                    <option value="widget">{{ 'Widget' | trans }}</option>
-                </select>
-            </div>
-        </div>
-
         <div class="uk-form-row ">
             <div class="uk-form-controls">
                 <button @click="toggle(showdetails)" class="uk-button">{{ showdetails ? "Hide Details" : "Show Details" | trans }}</button>

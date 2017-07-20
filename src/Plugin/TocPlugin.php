@@ -20,10 +20,6 @@ class TocPlugin implements EventSubscriberInterface
 		$module = App::module( 'spqr/toc' );
 		$config = $module->config;
 		
-		if ( $config[ 'mode' ] != 'content' ) {
-			return;
-		}
-		
 		if ( !$event[ 'post' ] && !$event[ 'page' ] ) {
 			return;
 		}
@@ -32,7 +28,11 @@ class TocPlugin implements EventSubscriberInterface
 			return;
 		}
 		
-		if ( ( !$config[ 'nodes' ] || in_array( App::request()->attributes->get( '_node' ), $config[ 'nodes' ] ) ) ) {
+		if ( $config[ 'autoinsert' ] && ( !$config[ 'nodes' ] || in_array(
+					App::request()->attributes->get( '_node' ),
+					$config[ 'nodes' ]
+				) )
+		) {
 			
 			$content = $event->getContent();
 			

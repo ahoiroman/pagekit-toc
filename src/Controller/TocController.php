@@ -1,5 +1,8 @@
 <?php
+
 namespace Spqr\Toc\Controller;
+
+use Pagekit\Application as App;
 
 /**
  * @Access(admin=true)
@@ -7,5 +10,4 @@ namespace Spqr\Toc\Controller;
  */
 class TocController
 {
- // TODO Remove Controller?
 }
