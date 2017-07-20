@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- ADD: Widget-mode
+- ADD: Choose mode
+- ADD: Possibility to add custom JavaScript
+
 ## 1.0.2
 
 - ADD: French translation (thanks to f1evm)
