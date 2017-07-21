@@ -55,15 +55,17 @@ return [
 			( !empty( $widget->get( 'fixed_sidebar_offset' ) ) ? $widget->get( 'fixed_sidebar_offset' ) : 'auto' );
 		
 		foreach ( $params as $key => $param ) {
-			if ( is_bool( $param ) ) {
-				if ( $param === true )
-					$paramstring .= "$key: true,";
-				if ( $param === false )
-					$paramstring .= "$key: false,";
-			} elseif ( is_numeric( $param ) ) {
-				$paramstring .= "$key: $param,";
-			} else {
-				$paramstring .= "$key: '$param',";
+			if(!empty($param)) {
+				if ( is_bool( $param ) ) {
+					if ( $param === true )
+						$paramstring .= "$key: true,";
+					if ( $param === false )
+						$paramstring .= "$key: false,";
+				} elseif ( is_numeric( $param ) ) {
+					$paramstring .= "$key: $param,";
+				} else {
+					$paramstring .= "$key: '$param',";
+				}
 			}
 		}
 		
