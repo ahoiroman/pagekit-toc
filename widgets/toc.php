@@ -74,7 +74,7 @@ return [
 		
 		$app[ 'styles' ]->add(
 			'tocbot',
-			'spqr/toc:app/assets/tocbot/dist/tocbot.css'
+			'spqr/toc:app/assets/tocbot/tocbot.css'
 		);
 		
 		if ( !empty( $widget->get( 'css' ) ) ) {
@@ -87,7 +87,7 @@ return [
 		
 		$app[ 'scripts' ]->add(
 			'tocbot',
-			'spqr/toc:app/assets/tocbot/dist/tocbot.js'
+			'spqr/toc:app/assets/tocbot/tocbot.js'
 		);
 		
 		$app[ 'scripts' ]->add( 'toc', $init, [], 'string' );
