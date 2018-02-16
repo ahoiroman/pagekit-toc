@@ -38,14 +38,14 @@ class TocPlugin implements EventSubscriberInterface
         ) {
             
             $content = $event->getContent();
-    
-            if($content) {
-                if(App::cache()->fetch('has_headings')){
-                    $markupfixer = new MarkupFixer();
-                    $content     = $markupfixer->fix( $content );
-                    $toc         = "<div class='toc " . $config[ 'toc_selector_class' ] . "'></div>";
-                    $event->setContent( $toc . $content );
-                }
+            
+            if ($content) {
+                $markupfixer = new MarkupFixer();
+                $content     = $markupfixer->fix($content);
+                $toc         = "<div class='toc ".$config['toc_selector_class']
+                    ."'></div>";
+                $event->setContent($toc.$content);
+                
             }
         }
         

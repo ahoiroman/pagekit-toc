@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- FIX: TOC is no longer shown, if there are no headlines on the page.
+
 ## 1.0.4
 
 - FIX: Fixed behavior on empty parameters
