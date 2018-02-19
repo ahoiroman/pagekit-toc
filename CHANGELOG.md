@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+
+- FIX: Fixed a bug that prevented that empty toc's are being shown in some cases.
+
 ## 1.0.5
 
 - FIX: TOC is no longer shown, if there are no headlines on the page.
