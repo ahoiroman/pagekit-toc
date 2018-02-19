@@ -78,8 +78,8 @@ return [
                     && (!$this->config['nodes']
                         || in_array($app['node']->id, $this->config['nodes']))
                 ) {
-                    $module       = App::module('spqr/toc');
-                    $config       = $module->config;
+                    $module      = App::module('spqr/toc');
+                    $config      = $module->config;
                     $params      = [];
                     $paramstring = '';
                     
@@ -166,11 +166,9 @@ return [
                         $app['styles']->add('tocbotcustomcss', $config['css'],
                             [], 'string');
                     }
-    
-                    if (!empty($config['css'])) {
-                        $app['styles']->add('tocbotonempty', '.toc:empty { display: none; }',
-                            [], 'string');
-                    }
+                    
+                    $app['styles']->add('tocbotonempty',
+                        '.toc:empty { display: none; }', [], 'string');
                     
                     if (!empty($config['js'])) {
                         $app['scripts']->add('tocbotcustomjs', $config['js'],
