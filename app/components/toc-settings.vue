@@ -1,221 +1,250 @@
 <template>
-    <div class="uk-form uk-form-horizontal">
-        <h1>{{ 'TOC Settings' | trans }}</h1>
-        <div class="uk-form-row">
-            <label class="uk-form-label">{{ 'Insert TOC automatically' | trans }}</label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <input type="checkbox" v-model="package.config.autoinsert">
-            </div>
-        </div>
-        <div v-if="package.config.autoinsert" class="uk-form-row">
-            <label class="uk-form-label">{{ 'Pages' | trans }}</label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <input-tree :active.sync="package.config.nodes"></input-tree>
-            </div>
-        </div>
-        <div class="uk-form-row ">
-            <div class="uk-form-controls">
-                <button @click="toggle(showdetails)" class="uk-button">{{ showdetails ? "Hide Details" : "Show Details" | trans }}</button>
-            </div>
-        </div>
-        <div v-show="showdetails">
+    <ul class="uk-tab" v-el:tab>
+        <li><a>{{ 'Settings' | trans }}</a></li>
+        <li><a>{{ 'Info' | trans }}</a></li>
+    </ul>
+    <div class="uk-switcher uk-margin" v-el:content>
+        <div class="uk-form uk-form-horizontal">
+            <h1>{{ 'TOC Settings' | trans }}</h1>
             <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Custom CSS' | trans }}</label>
+                <label class="uk-form-label">{{ 'Insert TOC automatically' | trans }}</label>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <v-editor type="code" :value.sync="package.config.css"></v-editor>
+                    <input type="checkbox" v-model="package.config.autoinsert">
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Custom JavaScript' | trans }}</label>
+            <div v-if="package.config.autoinsert" class="uk-form-row">
+                <label class="uk-form-label">{{ 'Pages' | trans }}</label>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <v-editor type="code" :value.sync="package.config.js"></v-editor>
+                    <input-tree :active.sync="package.config.nodes"></input-tree>
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'TOC Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.toc_selector_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Content Selector' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.content_selector">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Ignore Selector' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.ignore_selector">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Smooth Scroll' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <input type="checkbox" v-model="package.config.smoothscroll">
-                </div>
-            </div>
-            <div v-if="package.config.smoothscroll" class="uk-form-row">
-                <label class="uk-form-label">{{ 'Smooth Scroll Duration' | trans }}</label>
+            <div class="uk-form-row ">
                 <div class="uk-form-controls">
-                    <input class="uk-form-width-small uk-text-right" type="number"
-                           v-model="package.config.smoothscroll_duration" min="0" number>
+                    <button @click="toggle(showdetails)" class="uk-button">{{ showdetails ? "Hide Details" : "Show Details" | trans }}</button>
                 </div>
             </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Link Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.link_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Active Link Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.active_link_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'List Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.list_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'List Item Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.list_item_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Collapsible Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.collapsible_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Collapsed Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.collapsed_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Collapse Depth' | trans }}</label>
-                <div class="uk-form-controls">
-                    <select class="uk-form-large" v-model="package.config.collapse_depth">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Throttle Timeout' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input class="uk-form-width-small uk-text-right" type="number"
-                           v-model="package.config.throttle_timeout" min="0" number>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Heading Offset' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input class="uk-form-width-small uk-text-right" type="number"
-                           v-model="package.config.headings_offset" min="0" number>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Position Fixed Selector' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.position_fixed_selector">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Position Fixed Class' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.position_fixed_class">
-                    </p>
-                </div>
-            </div>
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Fixed Sidebar Offset' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed">
-                        <input type="text" class="uk-form-width-large" v-model="package.config.fixed_sidebar_offset">
-                    </p>
-                </div>
-            </div>
-            <form class="uk-form uk-form-stacked" v-validator="formHeadingSelector" @submit.prevent="add | valid">
-                <h2>{{ 'Heading Selectors' | trans }}</h2>
+            <div v-show="showdetails">
                 <div class="uk-form-row">
-                    <div class="uk-grid" data-uk-margin>
-                        <div class="uk-width-large-1-2">
-                            <input class="uk-input-large"
-                                   type="text"
-                                   placeholder="{{ 'Heading Selector' | trans }}"
-                                   name="heading_selector"
-                                   v-model="newHeadingSelector"
-                                   v-validate:required>
-                            <p class="uk-form-help-block uk-text-danger"
-                               v-show="formHeadingSelector.heading_selector.invalid">
-                                {{ 'Invalid value.' | trans }}</p>
-                        </div>
-                        <div class="uk-width-large-1-2">
-                            <div class="uk-form-controls">
-                                <span class="uk-align-right">
-                                    <button class="uk-button" @click.prevent="add | valid">
-                                        {{ 'Add' | trans }}
-                                    </button>
-                                </span>
+                    <label class="uk-form-label">{{ 'Custom CSS' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <v-editor type="code" :value.sync="package.config.css"></v-editor>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Custom JavaScript' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <v-editor type="code" :value.sync="package.config.js"></v-editor>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'TOC Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.toc_selector_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Content Selector' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.content_selector">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Ignore Selector' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.ignore_selector">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Smooth Scroll' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <input type="checkbox" v-model="package.config.smoothscroll">
+                    </div>
+                </div>
+                <div v-if="package.config.smoothscroll" class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Smooth Scroll Duration' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-form-width-small uk-text-right" type="number"
+                               v-model="package.config.smoothscroll_duration" min="0" number>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Link Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.link_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Active Link Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.active_link_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'List Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.list_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'List Item Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.list_item_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Collapsible Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.collapsible_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Collapsed Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.collapsed_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Collapse Depth' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <select class="uk-form-large" v-model="package.config.collapse_depth">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Throttle Timeout' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-form-width-small uk-text-right" type="number"
+                               v-model="package.config.throttle_timeout" min="0" number>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Heading Offset' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input class="uk-form-width-small uk-text-right" type="number"
+                               v-model="package.config.headings_offset" min="0" number>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Position Fixed Selector' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.position_fixed_selector">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Position Fixed Class' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.position_fixed_class">
+                        </p>
+                    </div>
+                </div>
+                <div class="uk-form-row">
+                    <label class="uk-form-label">{{ 'Fixed Sidebar Offset' | trans }}</label>
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <p class="uk-form-controls-condensed">
+                            <input type="text" class="uk-form-width-large" v-model="package.config.fixed_sidebar_offset">
+                        </p>
+                    </div>
+                </div>
+                <form class="uk-form uk-form-stacked" v-validator="formHeadingSelector" @submit.prevent="add | valid">
+                    <h2>{{ 'Heading Selectors' | trans }}</h2>
+                    <div class="uk-form-row">
+                        <div class="uk-grid" data-uk-margin>
+                            <div class="uk-width-large-1-2">
+                                <input class="uk-input-large"
+                                       type="text"
+                                       placeholder="{{ 'Heading Selector' | trans }}"
+                                       name="heading_selector"
+                                       v-model="newHeadingSelector"
+                                       v-validate:required>
+                                <p class="uk-form-help-block uk-text-danger"
+                                   v-show="formHeadingSelector.heading_selector.invalid">
+                                    {{ 'Invalid value.' | trans }}</p>
+                            </div>
+                            <div class="uk-width-large-1-2">
+                                <div class="uk-form-controls">
+                                    <span class="uk-align-right">
+                                        <button class="uk-button" @click.prevent="add | valid">
+                                            {{ 'Add' | trans }}
+                                        </button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
+                <hr/>
+                <div class="uk-alert"
+                     v-if="!package.config.heading_selector.length">{{ 'You can add your first heading selector using the input field above. Go ahead!' | trans }}
                 </div>
-            </form>
-            <hr/>
-            <div class="uk-alert"
-                 v-if="!package.config.heading_selector.length">{{ 'You can add your first heading selector using the input field above. Go ahead!' | trans }}
+                <ul class="uk-list uk-list-line" v-if="package.config.heading_selector.length">
+                    <li v-for="headingSelector in package.config.heading_selector">
+                        <input class="uk-input-large"
+                               type="text"
+                               placeholder="{{ 'Heading Selector' | trans }}"
+                               v-model="headingSelector"/>
+                        <span class="uk-align-right">
+                            <button class="uk-button uk-button-danger" @click="remove(headingSelector)">
+                                <i class="uk-icon-remove"></i>
+                            </button>
+                        </span>
+                    </li>
+                </ul>
             </div>
-            <ul class="uk-list uk-list-line" v-if="package.config.heading_selector.length">
-                <li v-for="headingSelector in package.config.heading_selector">
-                    <input class="uk-input-large"
-                           type="text"
-                           placeholder="{{ 'Heading Selector' | trans }}"
-                           v-model="headingSelector"/>
-                    <span class="uk-align-right">
-                        <button class="uk-button uk-button-danger" @click="remove(headingSelector)">
-                            <i class="uk-icon-remove"></i>
-                        </button>
-                    </span>
-                </li>
-            </ul>
+            <div class="uk-form-row uk-margin-top">
+                <div class="uk-form-controls">
+                    <button class="uk-button uk-button-primary" @click="save">{{ 'Save' | trans }}</button>
+                </div>
+            </div>
         </div>
-        <div class="uk-form-row uk-margin-top">
-            <div class="uk-form-controls">
-                <button class="uk-button uk-button-primary" @click="save">{{ 'Save' | trans }}</button>
+        <div class="uk-form uk-form-horizontal">
+            <h1>{{ 'TOC Info' | trans }}</h1>
+            <div class="uk-form-row">
+                <label class="uk-form-label">{{ 'Getting help' | trans }}</label>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <div class="uk-panel uk-panel-box">
+                        <p>{{ 'You have problems using this extension? Join the Pagekit community forum.' | trans }}</p>
+                        <a class="uk-button uk-width-1-1 uk-button-large" href="https://pagekit-forum.org"
+                           target="_blank">Pagekit Forum</a>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label">{{ 'Donate' | trans }}</label>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <div class="uk-panel uk-panel-box">
+                        <p>{{ 'Do you like my extensions? They are free. Of course I would like to get a donation, so if you want to, please open the donate link. You may find three possibilities to donate: PayPal, Patreon and Coinhive.' | trans }} </p>
+                        <a class="uk-button uk-button-large uk-width-1-1 uk-button-primary"
+                           href="https://spqr.wtf/support-me" target="_blank">Donate</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -233,6 +262,10 @@ module.exports = {
 		return {
 			'showdetails': false
 		};
+	},
+
+	ready: function () {
+		this.tab = UIkit.tab (this.$els.tab, {connect: this.$els.content});
 	},
 
 	methods: {
