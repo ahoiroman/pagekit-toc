@@ -166,6 +166,11 @@ return [
                         $app['styles']->add('tocbotcustomcss', $config['css'],
                             [], 'string');
                     }
+    
+                    if (!empty($config['css'])) {
+                        $app['styles']->add('tocbotonempty', '.toc:empty { display: none; }',
+                            [], 'string');
+                    }
                     
                     if (!empty($config['js'])) {
                         $app['scripts']->add('tocbotcustomjs', $config['js'],
