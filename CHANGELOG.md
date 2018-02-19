@@ -3,6 +3,7 @@
 ## 1.0.5
 
 - FIX: TOC is no longer shown, if there are no headlines on the page.
+- ADD: Added Info-Tab to the settings
 
 ## 1.0.4
 
