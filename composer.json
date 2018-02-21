@@ -1,7 +1,7 @@
 {
   "name": "spqr/toc",
   "module": "spqr/toc",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "pagekit-extension",
   "title": "Table Of Contents",
   "description": "Adds a table of contents",

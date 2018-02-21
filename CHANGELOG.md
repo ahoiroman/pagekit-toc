@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.7
+
+- FIX: Updated dependency (tocbot) to 4.2.1, which prevents scrolling to top of the page after clicking `href='#'` (e.g. the "Reply" link on blog-comments).
+
 ## 1.0.6
 
 - FIX: Fixed a bug that prevented that empty toc's are being shown in some cases.
