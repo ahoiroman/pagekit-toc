@@ -19,6 +19,9 @@ return [
         $params['tocSelector']
                      = (!empty($widget->get('toc_selector'))
             ? $widget->get('toc_selector') : '');
+        $params['toc_selector_class']
+            = (!empty($widget->get('toc_selector_class'))
+            ? $widget->get('toc_selector_class') : '');
         $params['headingSelector']
                      = (!empty($widget->get('heading_selector')) ? implode(",",
             $widget->get('heading_selector')) : '');
@@ -107,7 +110,10 @@ return [
         
         $app['scripts']->add('toc', $init, [], 'string');
         
-        return $app->view('spqr/toc/widget/toc.php');
+        $toc_selector_class = $params['toc_selector_class'];
+        
+        return $app->view('spqr/toc/widget/toc.php',
+            compact('toc_selector_class'));
     },
 
 ];

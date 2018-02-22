@@ -1,1 +1,1 @@
-<div id="toc" class="toc"></div>
+<div id="toc" class="toc <?= $toc_selector_class ?>"></div>
