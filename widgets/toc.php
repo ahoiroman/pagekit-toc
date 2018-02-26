@@ -1,6 +1,8 @@
 <?php
 
 use Pagekit\Application as App;
+use TOC\MarkupFixer;
+
 
 return [
     'name'   => 'spqr/toc',
@@ -9,10 +11,20 @@ return [
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('toc-widget',
                 'spqr/toc:app/bundle/toc-widget.js', ['~widgets']);
-        },
+        }
     ],
     
     'render' => function ($widget) use ($app) {
+        $app->on('view.content', function ($event, $view) use ($app) {
+            $content  = $event->getResult();
+            
+            if ($content) {
+                $markupfixer = new MarkupFixer();
+                $content     = $markupfixer->fix($content);
+                $event->setResult($content);
+                
+            }
+        });
         
         $params      = [];
         $paramstring = '';
@@ -20,7 +32,7 @@ return [
                      = (!empty($widget->get('toc_selector'))
             ? $widget->get('toc_selector') : '');
         $params['toc_selector_class']
-            = (!empty($widget->get('toc_selector_class'))
+                     = (!empty($widget->get('toc_selector_class'))
             ? $widget->get('toc_selector_class') : '');
         $params['headingSelector']
                      = (!empty($widget->get('heading_selector')) ? implode(",",
@@ -92,7 +104,8 @@ return [
         }
         
         $paramstring = rtrim($paramstring, ",");
-        $init        = "$(function() { tocbot.init({ $paramstring }); });";
+        
+        $init = "window.onload = function () { tocbot.init({ $paramstring }); }";
         
         $app['styles']->add('tocbot', 'spqr/toc:app/assets/tocbot/tocbot.css');
         
@@ -108,7 +121,7 @@ return [
         
         $app['scripts']->add('tocbot', 'spqr/toc:app/assets/tocbot/tocbot.js');
         
-        $app['scripts']->add('toc', $init, [], 'string');
+        $app['scripts']->add('toc', $init, ['vue'], 'string');
         
         $toc_selector_class = $params['toc_selector_class'];
         
