@@ -16,14 +16,8 @@ return [
     
     'nodes' => [],
     
-    'routes'  => [
-        '/toc' => [
-            'name'       => '@toc',
-            'controller' => [
-                'Spqr\\Toc\\Controller\\TocController',
-            ],
-        ],
-    ],
+    'routes' => [],
+    
     'widgets' => [
         'widgets/toc.php',
     ],
