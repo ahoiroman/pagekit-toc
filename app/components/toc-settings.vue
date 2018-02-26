@@ -242,7 +242,7 @@
                     <div class="uk-panel uk-panel-box">
                         <p>{{ 'Do you like my extensions? They are free. Of course I would like to get a donation, so if you want to, please open the donate link. You may find three possibilities to donate: PayPal, Patreon and Coinhive.' | trans }} </p>
                         <a class="uk-button uk-button-large uk-width-1-1 uk-button-primary"
-                           href="https://spqr.wtf/support-me" target="_blank">Donate</a>
+                           href="https://spqr.wtf/support-me" target="_blank">{{ 'Donate' | trans }}</a>
                     </div>
                 </div>
             </div>
