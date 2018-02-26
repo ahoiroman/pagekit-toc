@@ -17,14 +17,7 @@ return [
     
     'nodes' => [],
     
-    'routes'  => [
-        '/toc' => [
-            'name'       => '@toc',
-            'controller' => [
-                'Spqr\\Toc\\Controller\\TocController',
-            ],
-        ],
-    ],
+    'routes'  => [],
     'widgets' => [
         'widgets/toc.php',
     ],
@@ -84,8 +77,8 @@ return [
                 $paramstring = '';
                 
                 $params['tocSelector']
-                    = (!empty($config['toc_selector'])
-                    ? $config['toc_selector'] : '');
+                    = (!empty($config['toc_selector']) ? $config['toc_selector']
+                    : '');
                 $params['headingSelector']
                     = (!empty($config['heading_selector']) ? implode(",",
                     $config['heading_selector']) : '');
@@ -99,8 +92,8 @@ return [
                     = (!empty($config['link_class']) ? $config['link_class']
                     : '');
                 $params['smoothScroll']
-                    = (!empty($config['smoothscroll'])
-                    ? $config['smoothscroll'] : false);
+                    = (!empty($config['smoothscroll']) ? $config['smoothscroll']
+                    : false);
                 $params['smoothScrollDuration']
                     = (!empty($config['smoothscroll_duration'])
                     ? $config['smoothscroll_duration'] : 0);
@@ -157,22 +150,23 @@ return [
                 
                 $paramstring = rtrim($paramstring, ",");
                 
-                $init = "window.onload = function () { tocbot.init({ $paramstring }); }";
+                $init
+                    = "window.onload = function () { tocbot.init({ $paramstring }); }";
                 
                 $app['styles']->add('tocbot',
                     'spqr/toc:app/assets/tocbot/tocbot.css');
                 
                 if (!empty($config['css'])) {
-                    $app['styles']->add('tocbotcustomcss', $config['css'],
-                        [], 'string');
+                    $app['styles']->add('tocbotcustomcss', $config['css'], [],
+                        'string');
                 }
                 
                 $app['styles']->add('tocbotonempty',
                     '.toc:empty { display: none; }', [], 'string');
                 
                 if (!empty($config['js'])) {
-                    $app['scripts']->add('tocbotcustomjs', $config['js'],
-                        [], 'string');
+                    $app['scripts']->add('tocbotcustomjs', $config['js'], [],
+                        'string');
                 }
                 
                 $app['scripts']->add('tocbot',
