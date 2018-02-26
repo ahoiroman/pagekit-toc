@@ -6,6 +6,7 @@
 - FIX: Removed unnecessary files and contents
 - FIX: Fixes html markup when TOC is running in widget mode
 - FIX: Solves an issue with extensions that make use of Vue.js in headings
+- FIX: Solved some minor issues by updating tocbot to 4.3.0
 
 ## 1.0.8
 
