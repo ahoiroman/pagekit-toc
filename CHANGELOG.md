@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.9
+
+- FIX: Fixes missing translation
+- FIX: Removed unnecessary files and contents
+- FIX: Fixes html markup when TOC is running in widget mode
+- FIX: Solves an issue with extensions that make use of Vue.js in headings
+
+## 1.0.8
+
+- FIX: Adds additional class to toc in widget mode
+
 ## 1.0.7
 
 - FIX: Updated dependency (tocbot) to 4.2.1, which prevents scrolling to top of the page after clicking `href='#'` (e.g. the "Reply" link on blog-comments).
