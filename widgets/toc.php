@@ -1,7 +1,7 @@
 <?php
 
 use Pagekit\Application as App;
-use TOC\MarkupFixer;
+use Spqr\Toc\Helper\MarkupHelper;
 
 
 return [
@@ -11,16 +11,16 @@ return [
         'view.scripts' => function ($event, $scripts) use ($app) {
             $scripts->register('toc-widget',
                 'spqr/toc:app/bundle/toc-widget.js', ['~widgets']);
-        }
+        },
     ],
     
     'render' => function ($widget) use ($app) {
         $app->on('view.content', function ($event, $view) use ($app) {
-            $content  = $event->getResult();
+            $content = $event->getResult();
             
             if ($content) {
-                $markupfixer = new MarkupFixer();
-                $content     = $markupfixer->fix($content);
+                $mhelper = new MarkupHelper;
+                $content = $mhelper->fix($content);
                 $event->setResult($content);
                 
             }
@@ -105,7 +105,8 @@ return [
         
         $paramstring = rtrim($paramstring, ",");
         
-        $init = "window.onload = function () { tocbot.init({ $paramstring }); }";
+        $init
+            = "window.onload = function () { tocbot.init({ $paramstring }); }";
         
         $app['styles']->add('tocbot', 'spqr/toc:app/assets/tocbot/tocbot.css');
         

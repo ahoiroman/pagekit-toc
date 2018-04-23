@@ -1,5 +1,14 @@
 # Changelog
 
+# 1.0.10
+
+- FIX: Removed dependencies "caseyamcl/toc", "masterminds/html5",  "knplabs/knp-menu"
+- FIX: Added a improved markup fixer that solves possible problems with non-standard HTML-attributes
+
+# 1.0.9
+
+- FIX: Updated dependencies
+
 
 ## 1.0.8
 

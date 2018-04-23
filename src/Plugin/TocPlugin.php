@@ -5,7 +5,7 @@ namespace Spqr\Toc\Plugin;
 use Pagekit\Application as App;
 use Pagekit\Content\Event\ContentEvent;
 use Pagekit\Event\EventSubscriberInterface;
-use TOC\MarkupFixer;
+use Spqr\Toc\Helper\MarkupHelper;
 
 class TocPlugin implements EventSubscriberInterface
 {
@@ -40,9 +40,9 @@ class TocPlugin implements EventSubscriberInterface
             $content = $event->getContent();
             
             if ($content) {
-                $markupfixer = new MarkupFixer();
-                $content     = $markupfixer->fix($content);
-                $toc         = "<div class='toc ".$config['toc_selector_class']
+                $mhelper = new MarkupHelper;
+                $content = $mhelper->fix($content);
+                $toc     = "<div class='toc ".$config['toc_selector_class']
                     ."'></div>";
                 $event->setContent($toc.$content);
                 
